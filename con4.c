@@ -74,11 +74,22 @@ int main(void)
     printf("\n3. Quit"                       );
     printf("\n Please Enter Your Choice:\n\n");
     
-	    /* play a game option */
     int min = 1, max = 3;
-
     get_integer(&result, length, min, max);  
     printf("Your selection was: %d", result);
+    
+    switch(result)
+    {   
+        case 1:
+            printf("Play Game");
+            break;
+        case 2:
+            printf("Display High Scores");
+            break;
+        case 3:
+            printf("\nThanks for playing...\n");
+            return EXIT_SUCCESS;
+    }
 
 		    /* if there was not a draw, add player to the scoreboard in 
 		     * order by number of tokens in play
