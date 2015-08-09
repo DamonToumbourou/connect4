@@ -18,6 +18,15 @@ enum input_result get_human_player(struct player* human)
      * for their name and then initialise all other values in the
      * player struct to sensible values.
      */
+    char temp_name[NAMELEN+1];
+    printf("\nPlease enter your name: ");
+    
+    get_string(temp_name, NAMELEN+1);
+    
+    strcpy(human->name, temp_name);  
+    
+    printf("Player Name: %s", human->name);
+
     return FAILURE;
 }
 

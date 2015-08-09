@@ -46,4 +46,8 @@ enum input_result
 void read_rest_of_line(void);
 
 int get_integer(int* integer, int length, int min, int max);
+
+int get_string(char* string, unsigned length);
+
 #endif
+

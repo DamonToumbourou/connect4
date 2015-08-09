@@ -83,3 +83,40 @@ int get_integer(int* integer, int length, int min, int max)
 
    return SUCCESS;
 }
+
+
+/* getString function taken from: Steven Burrows*/
+/* Validates string input from user */
+int get_string(char* string, unsigned length)
+{
+   int finished = FALSE;
+   char tempString[TEMP_STRING_LENGTH + 2];
+
+   /* Continue to interact with the user until the input is valid. */
+   do
+   {
+      /* Accept input. "+2" is for the \n and \0 characters. */
+      fgets(tempString, length + 2, stdin);
+
+      /* A string that doesn't have a newline character is too long. */
+      if (tempString[strlen(tempString) - 1] != '\n')
+      {
+         printf("Input was too long.\n");
+         read_rest_of_line();
+      }
+      else
+      {
+         finished = TRUE;
+      }
+
+   } while (finished == FALSE);
+
+   /* Overwrite the \n character with \0. */
+   tempString[strlen(tempString) - 1] = '\0';
+   
+   /* Make the result string available to calling function. */
+   strcpy(string, tempString);
+
+   return SUCCESS;
+}
+

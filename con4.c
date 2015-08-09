@@ -82,6 +82,9 @@ int main(void)
     {   
         case 1:
             printf("Play Game");
+            
+            get_human_player(&human_player);
+            
             break;
         case 2:
             printf("Display High Scores");
