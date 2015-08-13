@@ -83,17 +83,19 @@ int main(void)
     {   
         case 1:
             printf("Play Game");         
+
             /* initialize human and computer player located in player.c */
             get_human_player(&human_player);
             printf("Color: %d", human_player.thiscolor);
             get_computer_player(&computer_player);
             printf("\n%s", "hello");
-            /* initialize the game board located in board.c */
-            
-            enum cell_contents board[6][BOARDWIDTH];        
-            
+          
+            /* initialize the game board located in board.c */  
+            enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];        
             initialise_board(board);
 
+            /* Display Board */
+            display_board(board);
             break;
 
         case 2:
@@ -117,4 +119,5 @@ int main(void)
 
 		/* quit the program option */
     return EXIT_SUCCESS;
+
 }

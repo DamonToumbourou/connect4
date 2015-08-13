@@ -25,7 +25,6 @@ void initialise_board(enum cell_contents board[][BOARDWIDTH])
     for (int i = 0; i < BOARDHEIGHT; i++) {
         for (int j = 0; j < BOARDWIDTH; j++) {
         board[i][j] = C_EMPTY;  
-        printf("\n%d\n", board[i][j]);
         }
     }
 }
@@ -37,11 +36,19 @@ void initialise_board(enum cell_contents board[][BOARDWIDTH])
  **/
 void display_board(enum cell_contents board[][BOARDWIDTH])
 {   
-    /*
-    for (int i = 1; i < 7; ++i) {
-       printf(" $d | ", i); 
+    printf("\n%s\n", "Displaying Board");
+
+    for (int k = 1; k < BOARDWIDTH + 1; ++k) {
+        printf(" %d |", k);  
     }
-    */
+    for (int i = 0; i < BOARDHEIGHT; ++i) {
+       printf("\n----------------------------\n");
+       for (int j = 0; j < BOARDWIDTH; ++j) {
+           printf(" " WHITE_TOKEN " |", board[i][j]);
+       }
+    }
+       printf("\n----------------------------\n");
+
  }
  
 
