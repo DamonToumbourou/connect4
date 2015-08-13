@@ -31,9 +31,8 @@ enum input_result get_human_player(struct player* human)
     /* set player color random*/
     srand(time(NULL));
     int random = rand() % 2; 
-    human->thiscolor = random;
-    printf("\nYour color is: %d\n", human->thiscolor);
-
+    human->thiscolor = random + 1;
+    
     /* set counter to 0 */
     human->counters = 0; 
     
@@ -53,12 +52,10 @@ enum input_result get_computer_player(struct player * computer)
     
     /* set name */
     strcpy(computer->name, "Computer");
-    printf("\nComputer name: %s\n", computer->name);
 
     /* set color */
-    int humancolor = 0;
     /* !!! need to set to oppisite of human player */    
-    computer->thiscolor = humancolor; 
+    computer->thiscolor = 0; 
     
     /* set counter to zero */
     computer->counters = 0;

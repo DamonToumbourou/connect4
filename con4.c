@@ -86,16 +86,24 @@ int main(void)
 
             /* initialize human and computer player located in player.c */
             get_human_player(&human_player);
-            printf("Color: %d", human_player.thiscolor);
+            printf("\nHuman Color: %d\n", human_player.thiscolor);
+           
+            /* set computer color */ 
             get_computer_player(&computer_player);
-            printf("\n%s", "hello");
-          
-            /* initialize the game board located in board.c */  
-            enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];        
-            initialise_board(board);
+             
+            if (human_player.thiscolor == C_WHITE) {
+                computer_player.thiscolor = C_RED; 
+            } else (computer_player.thiscolor = C_WHITE);
+            
+                 
+            printf("\ncomputer color: %d\n", computer_player.thiscolor);
 
-            /* Display Board */
-            display_board(board);
+            /* initialize the game board located in board.c */         
+        
+
+            /* play game */
+            play_game(&human_player, &computer_player);
+           
             break;
 
         case 2:

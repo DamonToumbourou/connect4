@@ -34,6 +34,7 @@
 static void swap_players(struct player ** current, struct player ** other)
 {
     /* implement a classic swap using a temporary pointer */
+    
 }
 
 /**
@@ -68,11 +69,26 @@ static void swap_players(struct player ** current, struct player ** other)
  * @param human a pointer to details about the human player
  * @param computer a pointer to details about the computer player
  **/
-struct player * play_game(struct player * human , struct player* computer)
+struct player* play_game(struct player* human , struct player* computer)
 {
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
-        
+    
+    initialise_board(board);
+    display_board(board);     
+    
+    enum playertype current;
+    if (human->thiscolor == C_WHITE) {
+        printf("\n%s\n", "Human player goes first as is white token");
+        current = HUMAN;
+    
+    } else {
+        printf("\n%s\n", "Computer player goes first as is white token");
+        current = COMPUTER;
+    }
+    printf("\n%i\n", current);
+    
+    
     return NULL;
 }
 
