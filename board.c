@@ -6,7 +6,8 @@
 * Course Code      : COSC1076
 * Program Code     : BP064
 * Start up code provided by Paul Miller
-***********************************************************************/
+* File: board.c
+ ***********************************************************************/
 #include "board.h"
 #include "player.h"
 
@@ -20,11 +21,14 @@
  **/
 void initialise_board(enum cell_contents board[][BOARDWIDTH])
 {
-     for (int i = 0; i < 7; i++) {
-        for (int j = 0; j < 6; j++) {
-           table[i][j] = C_EMPTY; 
+    printf("\n%s\n", "init board"); 
+    for (int i = 0; i < BOARDHEIGHT; i++) {
+        for (int j = 0; j < BOARDWIDTH; j++) {
+        board[i][j] = C_EMPTY;  
+        printf("\n%d\n", board[i][j]);
+        }
+    }
 }
-
 /**
  * In this requirement you are required to display the game board. 
  * The game board should be displayed as shown on the first page of the 
@@ -33,26 +37,12 @@ void initialise_board(enum cell_contents board[][BOARDWIDTH])
  **/
 void display_board(enum cell_contents board[][BOARDWIDTH])
 {   
-    
+    /*
     for (int i = 1; i < 7; ++i) {
        printf(" $d | ", i); 
-}
+    }
+    */
+ }
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

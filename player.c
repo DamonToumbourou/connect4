@@ -6,26 +6,39 @@
 * Course Code      : EDIT HERE
 * Program Code     : EDIT HERE
 * Start up code provided by Paul Miller
+* File:     player.c
 ***********************************************************************/
 #include "player.h"
-
+#include <time.h> 
 /**
  * @param human the human player to initialise
  **/
+
 enum input_result get_human_player(struct player* human)
 {
     /* placeholder return value. You should prompt the user 
      * for their name and then initialise all other values in the
      * player struct to sensible values.
      */
+
+    /*Set players name */
     char temp_name[NAMELEN+1];
     printf("\nPlease enter your name: ");
-    
     get_string(temp_name, NAMELEN+1);
-    
     strcpy(human->name, temp_name);  
+    printf("\nHello %s\n", human->name);
+
+    /* set player color random*/
+    srand(time(NULL));
+    int random = rand() % 2; 
+    human->thiscolor = random;
+    printf("\nYour color is: %d\n", human->thiscolor);
+
+    /* set counter to 0 */
+    human->counters = 0; 
     
-    printf("Player Name: %s", human->name);
+    /* set player type Human or Computer */
+    human->type = HUMAN;
 
     return FAILURE;
 }
@@ -37,6 +50,22 @@ enum input_result get_computer_player(struct player * computer)
 {
     /* initialise all variables that are part of the struct to sensible 
      * values */
+    
+    /* set name */
+    strcpy(computer->name, "Computer");
+    printf("\nComputer name: %s\n", computer->name);
+
+    /* set color */
+    int humancolor = 0;
+    /* !!! need to set to oppisite of human player */    
+    computer->thiscolor = humancolor; 
+    
+    /* set counter to zero */
+    computer->counters = 0;
+
+    /* set type of player */
+    computer->type = COMPUTER;
+
 
     return FAILURE;
 }

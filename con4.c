@@ -6,6 +6,7 @@
 * Course Code      : 
 * Program Code     : 
 * Start up code provided by Paul Miller
+* File: con4.c
 ***********************************************************************/
 #include "con4.h"
 
@@ -76,19 +77,29 @@ int main(void)
     
     int min = 1, max = 3;
     get_integer(&result, length, min, max);  
-    printf("Your selection was: %d", result);
+    printf("\nYour selection was: %d\n", result);
     
     switch(result)
     {   
         case 1:
-            printf("Play Game");
-            
+            printf("Play Game");         
+            /* initialize human and computer player located in player.c */
             get_human_player(&human_player);
+            printf("Color: %d", human_player.thiscolor);
+            get_computer_player(&computer_player);
+            printf("\n%s", "hello");
+            /* initialize the game board located in board.c */
             
+            enum cell_contents board[6][BOARDWIDTH];        
+            
+            initialise_board(board);
+
             break;
+
         case 2:
             printf("Display High Scores");
             break;
+
         case 3:
             printf("\nThanks for playing...\n");
             return EXIT_SUCCESS;

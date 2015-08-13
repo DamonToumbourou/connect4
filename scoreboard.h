@@ -6,6 +6,7 @@
 * Course Code      : EDIT HERE
 * Program Code     : EDIT HERE
 * Start up code provided by Paul Miller
+* File:   scoreboard.h
 ***********************************************************************/
 #include "player.h"
 #include "bool.h"

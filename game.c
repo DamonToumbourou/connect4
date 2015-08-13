@@ -1,12 +1,13 @@
-***********************************************************************
+/***********************************************************************
 * COSC1076 - Advanced Programming Techniques
 * Semester 2 2015 Assignment #1 
-* Full Name        : EDIT HERE
-* Student Number   : EDIT HERE
-* Course Code      : EDIT HERE
-* Program Code     : EDIT HERE
+* Full Name        : Damon Toumbourou
+* Student Number   : s3019592
+* Course Code      : 
+* Program Code     : 
 * Start up code provided by Paul Miller
-***********************************************************************/
+* File:     game.c
+***********************************************************************/ 
 #include "game.h"
 
 /**
@@ -67,12 +68,11 @@ static void swap_players(struct player ** current, struct player ** other)
  * @param human a pointer to details about the human player
  * @param computer a pointer to details about the computer player
  **/
-struct player * play_game(struct player * human , 
-        struct player* computer)
+struct player * play_game(struct player * human , struct player* computer)
 {
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
-    
+        
     return NULL;
 }
 
@@ -107,8 +107,7 @@ struct player * play_game(struct player * human ,
  * Next, test for a draw. If none of these cases hold, return G_NO_WINNER.
  * @param board the gameboard to test for a winner
  **/
-enum game_state test_for_winner(
-        enum cell_contents board[][BOARDWIDTH])
+enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
 {
     /* default return value  - delete this comment and the return statement
      * below and replace them with the game logic for deciding whether a 

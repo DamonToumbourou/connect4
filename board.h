@@ -6,6 +6,7 @@
 * Course Code      : 
 * Program Code     : 
 * Start up code provided by Paul Miller
+* File: board.h
 ***********************************************************************/
 #include <string.h>
 #include <stdio.h>

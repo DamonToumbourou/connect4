@@ -6,6 +6,7 @@
 * Course Code      : EDIT HERE
 * Program Code     : EDIT HERE
 * Start up code provided by Paul Miller
+* File:     helper.c
 ***********************************************************************/
 #include "helpers.h"
 
@@ -24,6 +25,9 @@
  * player, board or game
  **/
 
+/**
+ * Deals with buffering
+ **/
 void read_rest_of_line(void)
 {
     int ch;
@@ -34,6 +38,8 @@ void read_rest_of_line(void)
 }
 
 
+/* Handles input of type integer  */
+/* Taken from Steven Burrows */
 int get_integer(int* integer, int length, int min, int max)
 {
    int finished = FALSE;
@@ -85,7 +91,7 @@ int get_integer(int* integer, int length, int min, int max)
 }
 
 
-/* getString function taken from: Steven Burrows*/
+/* getString function taken from: Steven Burrows */
 /* Validates string input from user */
 int get_string(char* string, unsigned length)
 {

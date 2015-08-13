@@ -6,6 +6,7 @@
 * Course Code      : EDIT HERE
 * Program Code     : EDIT HERE
 * Start up code provided by Paul Miller
+* File:     game.h 
 ***********************************************************************/
 #include <stdlib.h>
 #include "player.h"
@@ -40,13 +41,12 @@ enum game_state
  * Manages the game loop. See the documentation in the .c file for full
  * details. 
   **/
-struct player * play_game(struct player *, struct player*);
+struct player* play_game(struct player*, struct player*);
 
 /**
  * tests to see if the game has been won. A win is defined as four 
  * tokens in a row in any direction, however you should not wrap 
  * around the board.
  **/
-enum game_state test_for_winner(
-        enum cell_contents board[][BOARDWIDTH]);
+enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH]);
 
