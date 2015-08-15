@@ -44,12 +44,21 @@ void display_board(enum cell_contents board[][BOARDWIDTH])
     for (int i = 0; i < BOARDHEIGHT; ++i) {
        printf("\n----------------------------\n");
        for (int j = 0; j < BOARDWIDTH; ++j) {
-           printf(" " WHITE_TOKEN " |", board[i][j]);
-       }
+       
+            switch(board[i][j])
+            {
+            case C_EMPTY:
+                 printf("   |");  
+                break;
+            case C_WHITE:
+                 printf(" %s |", WHITE_TOKEN);
+                break; 
+            case C_RED:
+                 printf(" %s |", RED_TOKEN);
+                 break;
+            }
+        }
     }
-       printf("\n----------------------------\n");
-
- }
- 
-
+    printf("\n----------------------------");
+}
 

@@ -1,4 +1,4 @@
-/***********************************************************************
+/*********************************************************************
 * COSC1076 - Advanced Programming Techniques
 * Semester 2 2015 Assignment #1 
 * Full Name        : Damon Toumbourou
@@ -103,9 +103,9 @@ int main(void)
 
             /* play game */
             play_game(&human_player, &computer_player);
-           
+            
             break;
-
+            
         case 2:
             printf("Display High Scores");
             break;

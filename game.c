@@ -71,6 +71,7 @@ static void swap_players(struct player ** current, struct player ** other)
  **/
 struct player* play_game(struct player* human , struct player* computer)
 {
+    int selection;
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
     
@@ -81,13 +82,24 @@ struct player* play_game(struct player* human , struct player* computer)
     if (human->thiscolor == C_WHITE) {
         printf("\n%s\n", "Human player goes first as is white token");
         current = HUMAN;
-    
+        
+        int length = 1;
+        int min = 1, max = 7;
+        printf("\n%s\n", "Please enter a column number: ");
+        get_integer(&selection, length, min, max);
+        printf("\nYour column selection  %d\n", selection);     
+            
+        board[3][3] = C_WHITE; 
+
+        display_board(board);    
+
     } else {
         printf("\n%s\n", "Computer player goes first as is white token");
         current = COMPUTER;
     }
-    printf("\n%i\n", current);
+    printf("\n%iCurrent player:\n ", current);
     
+      
     
     return NULL;
 }
