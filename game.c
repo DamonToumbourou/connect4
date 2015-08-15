@@ -72,6 +72,7 @@ static void swap_players(struct player ** current, struct player ** other)
 struct player* play_game(struct player* human , struct player* computer)
 {
     int selection;
+    int length = 1; 
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
     
@@ -79,26 +80,47 @@ struct player* play_game(struct player* human , struct player* computer)
     display_board(board);     
     
     enum playertype current;
+    enum cell_contents current_token = C_WHITE;;
+
     if (human->thiscolor == C_WHITE) {
-        printf("\n%s\n", "Human player goes first as is white token");
-        current = HUMAN;
-        
-        int length = 1;
-        int min = 1, max = 7;
-        printf("\n%s\n", "Please enter a column number: ");
-        get_integer(&selection, length, min, max);
-        printf("\nYour column selection  %d\n", selection);     
-            
-        board[3][3] = C_WHITE; 
+        current = HUMAN;    
 
-        display_board(board);    
-
-    } else {
-        printf("\n%s\n", "Computer player goes first as is white token");
+        printf("\n%s\n", "Human goes first");
+    } else { 
         current = COMPUTER;
+
+        printf("\n%s\n", "Computer goes first");
     }
-    printf("\n%iCurrent player:\n ", current);
-    
+
+    while (TRUE) {
+        if (current == HUMAN) {
+            printf("\n%s\n", "Human turn:");
+            printf("\n%s\n", "Please enter a column number: ");
+           
+            get_integer(&selection, length, MINCOLUMN, MAXCOLUMN);
+            current = COMPUTER;
+            current_token = human->thiscolor; 
+
+        } else {
+            printf("\n%s\n", "Computer turn:");
+            
+            selection = get_random(MINCOLUMN, MAXCOLUMN);
+            current = HUMAN;
+            current_token = computer->thiscolor; 
+        }
+
+        /*board height */
+        for (int i = BOARDHEIGHT-1; i >= 0; --i) {
+            if (board[i][selection -1] == C_EMPTY) {
+                board[i][selection -1] = current_token;
+                break;
+            } 
+        } 
+
+        display_board(board);
+            
+        printf("\n%iCurrent player:\n ", current);
+    }    
       
     
     return NULL;

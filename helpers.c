@@ -126,3 +126,12 @@ int get_string(char* string, unsigned length)
    return SUCCESS;
 }
 
+/* random numbers between 2 ints */
+int get_random(int min, int max) {
+    srand(time(NULL));
+    int random = (rand() % 10 + 1) % (max - min + 1) + min;
+    printf("\n%d\n", random);
+    return random;  
+}
+
+

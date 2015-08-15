@@ -29,9 +29,8 @@ enum input_result get_human_player(struct player* human)
     printf("\nHello %s\n", human->name);
 
     /* set player color random*/
-    srand(time(NULL));
-    int random = rand() % 2; 
-    human->thiscolor = random + 1;
+
+    human->thiscolor = get_random(1, 2); 
     
     /* set counter to 0 */
     human->counters = 0; 
