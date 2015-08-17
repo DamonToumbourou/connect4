@@ -34,7 +34,11 @@
 static void swap_players(struct player ** current, struct player ** other)
 {
     /* implement a classic swap using a temporary pointer */
-    
+   /*
+   temporary = other;
+   other  = current;
+   current = temporary;
+    */
 }
 
 /**
@@ -118,8 +122,9 @@ struct player* play_game(struct player* human , struct player* computer)
         } 
 
         display_board(board);
-            
-        printf("\n%iCurrent player:\n ", current);
+
+        test_for_winner(board);     
+    
     }    
       
     
@@ -159,10 +164,73 @@ struct player* play_game(struct player* human , struct player* computer)
  **/
 enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
 {
-    /* default return value  - delete this comment and the return statement
-     * below and replace them with the game logic for deciding whether a 
-     * game has been won and who the winner is
-     */
-    return G_NO_WINNER;
+    int white_count = 0;
+    int red_count = 0;
+    int i = 0;
+    int j = 0;
+
+    /* test for winner in a row (horizontal) */
+    for (i = 0; i < BOARDHEIGHT; ++i) { 
+
+        for (j = 0; j < BOARDWIDTH; ++j) {
+      
+            if (board[i][j] == C_RED) {
+                red_count++;
+                if (red_count >= 4) {
+                    printf("\n%s\n", "Red Wins");
+                }
+            } else { 
+                red_count = 0;    
+            }
+
+            if (board[i][j] == C_WHITE) {
+                white_count++;
+                if (white_count >= 4) {
+                    printf("\n%s\n", "White Wins");
+                }
+            } else { 
+                white_count = 0;
+            }
+        } 
+    }
+    
+    /* test for winner in a columni (vertical) */
+    for (i = 0; i < BOARDWIDTH; ++i) {
+
+        for (j = 0; j < BOARDHEIGHT; ++j) {
+        
+            if (board[j][i] == C_RED) {
+               red_count ++;
+               if (red_count >= 4) {
+                  printf("\n%s\n", "Red Wins!");
+               }
+            } else {
+               red_count = 0;
+            }
+
+            if (board[j][i] == C_WHITE) {
+                white_count++;
+                if (white_count >= 4) {
+                    printf("\n%s\n", "White Wins!");
+                }
+            } else {
+                white_count = 0;
+            }
+        }
+    }
+
+    /* test for winner in diagnol */
+    
 }
+
+
+
+
+
+
+
+
+
+
+
 
