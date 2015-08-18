@@ -20,8 +20,7 @@
  * @param board the board to reset the contents of
  **/
 void initialise_board(enum cell_contents board[][BOARDWIDTH])
-{
-    printf("\n%s\n", "init board"); 
+{ 
     for (int i = 0; i < BOARDHEIGHT; i++) {
         for (int j = 0; j < BOARDWIDTH; j++) {
         board[i][j] = C_EMPTY;  
@@ -59,6 +58,6 @@ void display_board(enum cell_contents board[][BOARDWIDTH])
             }
         }
     }
-    printf("\n----------------------------");
+    printf("\n----------------------------\n");
 }
 

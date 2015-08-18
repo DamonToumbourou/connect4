@@ -34,11 +34,11 @@
 static void swap_players(struct player ** current, struct player ** other)
 {
     /* implement a classic swap using a temporary pointer */
-   /*
-   temporary = other;
-   other  = current;
-   current = temporary;
-    */
+   
+   enum playertype temp = temp;;
+   other = &current;
+   current = &temp;
+
 }
 
 /**
@@ -79,12 +79,12 @@ struct player* play_game(struct player* human , struct player* computer)
     int length = 1; 
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
-    
-    initialise_board(board);
-    display_board(board);     
-    
     enum playertype current;
-    enum cell_contents current_token = C_WHITE;;
+    enum playertype other; 
+    enum cell_contents current_token = C_WHITE;
+
+    initialise_board(board);
+    display_board(board);
 
     if (human->thiscolor == C_WHITE) {
         current = HUMAN;    
@@ -98,28 +98,40 @@ struct player* play_game(struct player* human , struct player* computer)
 
     while (TRUE) {
         if (current == HUMAN) {
-            printf("\n%s\n", "Human turn:");
+            printf("\n%s", "Human turn: ");
+            printf("%d", human->counters);
             printf("\n%s\n", "Please enter a column number: ");
            
             get_integer(&selection, length, MINCOLUMN, MAXCOLUMN);
-            current = COMPUTER;
+           /* current = COMPUTER;*/
+            swap_players(&current, &other);
             current_token = human->thiscolor; 
 
+            /* add to counter for human */
+            human->counters++;
+
         } else {
-            printf("\n%s\n", "Computer turn:");
-            
+            printf("\n%s", "Computer turn:");
+            printf("%d", computer->counters);
+
             selection = get_random(MINCOLUMN, MAXCOLUMN);
-            current = HUMAN;
+            /*current = HUMAN;*/
+            swap_players(&current, &other);
             current_token = computer->thiscolor; 
+            
+            /*nadd to counter for computer */
+            computer->counters++; 
         }
 
-        /*board height */
+        /**/
         for (int i = BOARDHEIGHT-1; i >= 0; --i) {
             if (board[i][selection -1] == C_EMPTY) {
                 board[i][selection -1] = current_token;
                 break;
             } 
         } 
+        
+        
 
         display_board(board);
 
@@ -193,7 +205,9 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
             }
         } 
     }
-    
+    white_count = 0;
+    red_count = 0;
+
     /* test for winner in a columni (vertical) */
     for (i = 0; i < BOARDWIDTH; ++i) {
 
@@ -202,7 +216,11 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
             if (board[j][i] == C_RED) {
                red_count ++;
                if (red_count >= 4) {
-                  printf("\n%s\n", "Red Wins!");
+                  enum game_state winner = G_RED; 
+                  printf("\n%s%s%s\n", "**********************\n",
+                                       "       Red Wins!      \n",
+                                       "**********************\n");
+                  main();
                }
             } else {
                red_count = 0;
@@ -211,16 +229,36 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
             if (board[j][i] == C_WHITE) {
                 white_count++;
                 if (white_count >= 4) {
-                    printf("\n%s\n", "White Wins!");
+                   
+                    printf("\n%s%s%s\n", "********************\n",
+                                         "     White Wins!    \n",
+                                         "********************\n");
+                    main();
                 }
             } else {
                 white_count = 0;
             }
         }
     }
+    white_count = 0;
+    red_count = 0; 
 
-    /* test for winner in diagnol */
-    
+    /* test for winner in diaganol */
+
+    /*
+    for (i = 0; i <  6; ++i) {
+        
+        for (j = 0; j < 6; ++j) { 
+             
+            if (board[j][i] == C_RED) {
+                white_count++;
+                if (white_count >= 4) {
+                    printf("\n%s\n", "White Wins!");
+                } 
+            } 
+        } 
+    }
+    */
 }
 
 

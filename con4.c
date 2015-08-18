@@ -94,7 +94,6 @@ int main(void)
             if (human_player.thiscolor == C_WHITE) {
                 computer_player.thiscolor = C_RED; 
             } else (computer_player.thiscolor = C_WHITE);
-            
                  
             printf("\ncomputer color: %d\n", computer_player.thiscolor);
 
