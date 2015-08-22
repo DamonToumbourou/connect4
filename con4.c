@@ -55,15 +55,14 @@
 int main(void)
 {
     int result;
-    int length = 1;  
-    /* the scoreboard for keeping track of winners */
+    int min, max;
+    int int_length = 1;  
+   
+    /* declare scoreboard for keeping track of winners */
     scoreboard scores;
-    /* the two players and a pointer to who won the last game */
+   
+    /* declare the two players and a pointer to who won the last game */
     struct player human_player, computer_player, *winner;
-
-    /* with each of the comments below, insert the code that performs 
-     * this function 
-     */
 
     /* initialise the scoreboard */
      
@@ -75,8 +74,8 @@ int main(void)
     printf("\n3. Quit"                       );
     printf("\n Please Enter Your Choice:\n\n");
     
-    int min = 1, max = 3;
-    get_integer(&result, length, min, max);  
+    min = 1, max = 3;
+    get_integer(&result, int_length, min, max);  
     printf("\nYour selection was: %d\n", result);
     
     switch(result)
@@ -84,22 +83,18 @@ int main(void)
         case 1:
             printf("Play Game");         
 
-            /* initialize human and computer player located in player.c */
+            /* initialize human player located in player.c */
             get_human_player(&human_player);
             printf("\nHuman Color: %d\n", human_player.thiscolor);
            
-            /* set computer color */ 
+            /* initialize computer */
             get_computer_player(&computer_player);
-             
+            
+            /* sets the color of computer after human is set to random */ 
             if (human_player.thiscolor == C_WHITE) {
                 computer_player.thiscolor = C_RED; 
             } else (computer_player.thiscolor = C_WHITE);
-                 
-            printf("\ncomputer color: %d\n", computer_player.thiscolor);
-
-            /* initialize the game board located in board.c */         
-        
-
+      
             /* play game */
             play_game(&human_player, &computer_player);
             

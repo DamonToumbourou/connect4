@@ -34,11 +34,11 @@
 static void swap_players(struct player ** current, struct player ** other)
 {
     /* implement a classic swap using a temporary pointer */
-   
-   enum playertype temp = temp;;
-   other = &current;
-   current = &temp;
+    struct player *temp;
 
+    temp = *current;
+    *current = *other;
+    *other = temp; 
 }
 
 /**
@@ -73,72 +73,50 @@ static void swap_players(struct player ** current, struct player ** other)
  * @param human a pointer to details about the human player
  * @param computer a pointer to details about the computer player
  **/
-struct player* play_game(struct player* human , struct player* computer)
+struct player* play_game(struct player *human , struct player *computer)
 {
-    int selection;
-    int length = 1; 
+    /* Function for controlling game */ 
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
-    enum playertype current;
-    enum playertype other; 
     enum cell_contents current_token = C_WHITE;
+ 
+    /* variable for storing current player */
+    struct player *current;
+    struct player *other;
 
+    /* initialize the game board */
     initialise_board(board);
-    display_board(board);
 
+    /* display the game board before turn */
+    display_board(board);
+    
+    /* determine current player (white goes first) */ 
     if (human->thiscolor == C_WHITE) {
-        current = HUMAN;    
+        current = human;
+        other = computer;
 
         printf("\n%s\n", "Human goes first");
+   
     } else { 
-        current = COMPUTER;
-
+        current = computer;
+        other = human; 
+            
         printf("\n%s\n", "Computer goes first");
     }
 
-    while (TRUE) {
-        if (current == HUMAN) {
-            printf("\n%s", "Human turn: ");
-            printf("%d", human->counters);
-            printf("\n%s\n", "Please enter a column number: ");
-           
-            get_integer(&selection, length, MINCOLUMN, MAXCOLUMN);
-           /* current = COMPUTER;*/
-            swap_players(&current, &other);
-            current_token = human->thiscolor; 
-
-            /* add to counter for human */
-            human->counters++;
-
-        } else {
-            printf("\n%s", "Computer turn:");
-            printf("%d", computer->counters);
-
-            selection = get_random(MINCOLUMN, MAXCOLUMN);
-            /*current = HUMAN;*/
-            swap_players(&current, &other);
-            current_token = computer->thiscolor; 
-            
-            /*nadd to counter for computer */
-            computer->counters++; 
-        }
-
-        /**/
-        for (int i = BOARDHEIGHT-1; i >= 0; --i) {
-            if (board[i][selection -1] == C_EMPTY) {
-                board[i][selection -1] = current_token;
-                break;
-            } 
-        } 
+    /* human and computer take a turn */
+    while(TRUE) {
+    
+        take_turn(current, board);
         
-        
-
         display_board(board);
 
-        test_for_winner(board);     
-    
-    }    
-      
+        test_for_winner(board);
+        
+        swap_players(&current, &other);  
+        
+        printf("\n%s\n", current->name);
+    }
     
     return NULL;
 }
@@ -189,7 +167,10 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
             if (board[i][j] == C_RED) {
                 red_count++;
                 if (red_count >= 4) {
-                    printf("\n%s\n", "Red Wins");
+                    printf("\n%s%s%s\n", 
+                            "*****************\n",
+                            "     Red Wins    \n",
+                            "*****************\n");
                 }
             } else { 
                 red_count = 0;    
@@ -198,7 +179,10 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
             if (board[i][j] == C_WHITE) {
                 white_count++;
                 if (white_count >= 4) {
-                    printf("\n%s\n", "White Wins");
+                    printf("\n%s%s%s\n",
+                           "******************\n", 
+                           "    White Wins    \n",
+                           "******************\n");
                 }
             } else { 
                 white_count = 0;

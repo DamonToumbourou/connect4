@@ -23,9 +23,11 @@ enum input_result get_human_player(struct player* human)
 
     /*Set players name */
     char temp_name[NAMELEN+1];
+
     printf("\nPlease enter your name: ");
     get_string(temp_name, NAMELEN+1);
     strcpy(human->name, temp_name);  
+
     printf("\nHello %s\n", human->name);
 
     /* set player color random*/
@@ -80,7 +82,7 @@ enum input_result get_computer_player(struct player * computer)
  * number to place a token in and if that column is full, generate a 
  * different column number until a column number with some free space has 
  * been found.
- *
+ L https://raw.githubusercontent.com/Homebrew/install/master/install)"
  * @param current the current player
  * @param board the game board that we will attempt to insert a token into
  * @return enum @ref input_result indicating the state of user input (in 
@@ -94,5 +96,46 @@ enum input_result take_turn(struct player * current,
      * value and replace it with appropriate logic to handle either
      * a human or computer turn including handling any input errors.
      */
+    printf("\n%s\n", "TEST!!!");    
+    printf("\n%s%d\n", "Current Player: ", current->type);
+
+    enum cell_contents current_token = C_WHITE;
+    int selection; 
+    int length = 1;
+   
+    /* loop for a turn */
+    
+    if (current->type == HUMAN) {
+        printf("\n%s", "Human Turn Number: ");
+
+        /* get column number from human */
+        printf("\n%s\n", "Please enter a column number human: "); 
+        get_integer(&selection, length, MINCOLUMN, MAXCOLUMN);
+            
+        /* get player token color */
+        current_token = current->thiscolor;
+
+        /* add to counter for human */
+        current->counters++;
+
+    } else {
+        printf("\n%s", "Computer Turn: ");
+        printf("%d", current->counters);
+            
+        selection = get_random(MINCOLUMN, MAXCOLUMN);
+    
+        current_token = current->thiscolor;
+    }    
+
+    /* add current player selection to the board */ 
+    int i;    
+    for (i = BOARDHEIGHT-1; i >= 0; --i) {
+        if (board[i][selection -1] == C_EMPTY) {
+            board[i][selection -1] = current_token;             
+            break;
+        }
+    }
+    
     return FAILURE;
 }
+
