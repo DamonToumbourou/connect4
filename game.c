@@ -165,25 +165,52 @@ struct player* play_game(struct player *human , struct player *computer)
  **/
 enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
 {
-    int white_count = 0;
-    int red_count = 0;
-    int i = 0;
-    int j = 0;
+    enum game_state winner_test;    
 
-    /* test for winner in a row (horizontal) */
+    winner_test = test_for_winner_horizontal(board); 
+
+
+    if (winner_test != G_NO_WINNER) {
+        return winner_test; 
+    }
+    
+    winner_test = test_for_winner_vertical(board);
+
+
+    if (winner_test != G_NO_WINNER) {
+        return winner_test;
+    }
+
+    winner_test = test_for_winner_diagonal(board);
+    if (winner_test != G_NO_WINNER) {
+        return winner_test;
+    }
+
+    return G_NO_WINNER; 
+}
+
+
+enum game_state test_for_winner_horizontal(enum cell_contents board[][BOARDWIDTH])
+{   
+    int i;
+    int j;
+    int red_count;
+    int white_count;
+
+    red_count = 0;
+    white_count = 0; 
+
     for (i = 0; i < BOARDHEIGHT; ++i) { 
-
+       
         for (j = 0; j < BOARDWIDTH; ++j) {
       
             if (board[i][j] == C_RED) {
                 red_count++;
                 if (red_count >= 4) {
-                    printf("\n%s%s%s\n", 
-                            "*****************\n",
-                            "     Red Wins    \n",
-                            "*****************\n");
+                    
                     return G_RED;
                 }
+
             } else { 
                 red_count = 0;    
             }
@@ -191,68 +218,129 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
             if (board[i][j] == C_WHITE) {
                 white_count++;
                 if (white_count >= 4) {
-                    printf("\n%s%s%s\n",
-                           "******************\n", 
-                           "    White Wins    \n",
-                           "******************\n");
                 
                     return G_WHITE; 
                 }
+
             } else { 
                 white_count = 0;
             }
         } 
     }
-    white_count = 0;
-    red_count = 0;
-
-    /* test for winner in a columni (vertical) */
-    for (i = 0; i < BOARDWIDTH; ++i) {
-
-        for (j = 0; j < BOARDHEIGHT; ++j) {
-        
-            if (board[j][i] == C_RED) {
-                red_count ++;
-               
-                if (red_count >= 4) {
-                    return G_RED;
-                }
-
-            } else {
-               red_count = 0;
-            }
-
-            if (board[j][i] == C_WHITE) {
-                white_count++;
-            
-                if (white_count >= 4) {
-                    return G_WHITE;
-                }
-
-            } else {
-                white_count = 0;
-            }
-        }
-    }
-    white_count = 0;
-    red_count = 0; 
-
-    /* test for winner in diaganol */
-
-    /*
-    for (i = 0; i <  6; ++i) {
-        
-        for (j = 0; j < 6; ++j) { 
-             
-            if (board[j][i] == C_RED) {
-                white_count++;
-                if (white_count >= 4) {
-                    printf("\n%s\n", "White Wins!");
-                } 
-            } 
-        } 
-    }
-    */
 
     return G_NO_WINNER; 
 }
+
+
+enum game_state test_for_winner_vertical(enum cell_contents board[][BOARDWIDTH]) 
+{
+    int i;
+    int j;
+    int red_count;
+    int white_count;
+
+    red_count = 0;
+    white_count = 0;
+
+
+     for (i = 0; i < BOARDWIDTH; ++i) {           
+                                                   
+         for (j = 0; j < BOARDHEIGHT; ++j) {
+         
+             if (board[j][i] == C_RED) {
+                 red_count ++;
+                
+                 if (red_count >= 4) {
+                     return G_RED;
+                 }
+                                                   
+             } else {
+                red_count = 0;
+             }
+                                                   
+             if (board[j][i] == C_WHITE) {
+                 white_count++;
+             
+                 if (white_count >= 4) {
+                     return G_WHITE;
+                 }
+                                                   
+             } else {
+                 white_count = 0;
+             }
+         }
+    }
+
+    return G_NO_WINNER;
+} 
+
+
+enum game_state test_for_winner_diagonal(enum cell_contents board[][BOARDWIDTH])
+{
+    int i;
+    int j;
+    int right_red_count;
+    int left_red_count;
+    int right_white_count;
+    int left_white_count; 
+
+    left_red_count = 0;
+    right_red_count = 0;
+    left_white_count = 0;
+    right_white_count = 0;
+
+    for (i = 0; i < BOARDHEIGHT; ++i) {
+        
+        for (j = 0; j < BOARDWIDTH; ++j) {
+            
+            if (board[i][j] == C_EMPTY) {
+                continue;       
+            }
+
+            for (int k = 0; k < 4; ++k) {
+
+                if ((j+k < BOARDWIDTH-1) && (i+k < BOARDHEIGHT)) {
+                    
+                    if (board[i + k][j + k] == C_RED) {
+                        right_red_count++;
+                    }
+    
+                    if (board[i + k][j + k] == C_WHITE) {
+                        right_white_count++;
+                    }
+                }
+           
+                if ((j-k >= 0) && (k+i < BOARDHEIGHT)) {   
+
+                    if (board[i + k][j - k] == C_RED) {
+                        left_red_count++;
+                    }
+
+                    if (board[i + k][j - k] == C_WHITE) {
+                        left_white_count++;
+                    }
+                }
+             }
+  
+            /* test red */
+            if (left_red_count == 4 || right_red_count == 4) {
+                return G_RED;
+            } else { 
+                left_red_count = 0; 
+                right_red_count = 0;
+            }
+
+            /* test white */
+            if (left_white_count == 4 || right_white_count == 4) {
+                return G_WHITE;
+            } else {
+                left_white_count = 0;
+                right_white_count = 0; 
+            }
+            
+        }
+    }
+    
+    return G_NO_WINNER;
+}
+
