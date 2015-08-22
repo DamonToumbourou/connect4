@@ -9,7 +9,6 @@
 * File:     player.c
 ***********************************************************************/
 #include "player.h"
-#include <time.h> 
 /**
  * @param human the human player to initialise
  **/
@@ -96,13 +95,10 @@ enum input_result take_turn(struct player * current,
      * value and replace it with appropriate logic to handle either
      * a human or computer turn including handling any input errors.
      */
-    printf("\n%s\n", "TEST!!!");    
-    printf("\n%s%d\n", "Current Player: ", current->type);
-
-    enum cell_contents current_token = C_WHITE;
+    enum cell_contents current_token;
     int selection; 
     int length = 1;
-   
+    int i; 
     /* loop for a turn */
     
     if (current->type == HUMAN) {
@@ -128,7 +124,6 @@ enum input_result take_turn(struct player * current,
     }    
 
     /* add current player selection to the board */ 
-    int i;    
     for (i = BOARDHEIGHT-1; i >= 0; --i) {
         if (board[i][selection -1] == C_EMPTY) {
             board[i][selection -1] = current_token;             

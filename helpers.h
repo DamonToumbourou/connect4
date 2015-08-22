@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 #include "bool.h"
 
 /**
@@ -49,5 +50,6 @@ int get_integer(int* integer, int length, int min, int max);
 
 int get_string(char* string, unsigned length);
 
+int get_random(int min, int max); 
 #endif
 

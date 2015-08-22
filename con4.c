@@ -67,59 +67,62 @@ int main(void)
     /* initialise the scoreboard */
      
     /*display menu and get menu choice until the user chooses to quit */
-    printf("\nWelcome to connect 4"          );
-    printf("\n--------------------"          );
-    printf("\n1. Play Game"                  );
-    printf("\n2. Display High Scores"        );
-    printf("\n3. Quit"                       );
-    printf("\n Please Enter Your Choice:\n\n");
     
-    min = 1, max = 3;
-    get_integer(&result, int_length, min, max);  
-    printf("\nYour selection was: %d\n", result);
-    
-    switch(result)
-    {   
-        case 1:
-            printf("Play Game");         
+    while(TRUE) {
+        printf("\nWelcome to connect 4"          );
+        printf("\n--------------------"          );
+        printf("\n1. Play Game"                  );
+        printf("\n2. Display High Scores"        );
+        printf("\n3. Quit"                       );
+        printf("\n Please Enter Your Choice:\n\n");
+        
+        min = 1, max = 3;
+        get_integer(&result, int_length, min, max);  
+        printf("\nYour selection was: %d\n", result);
+        
+        switch(result)
+        {   
+            case 1:
+                printf("Play Game");         
 
-            /* initialize human player located in player.c */
-            get_human_player(&human_player);
-            printf("\nHuman Color: %d\n", human_player.thiscolor);
-           
-            /* initialize computer */
-            get_computer_player(&computer_player);
-            
-            /* sets the color of computer after human is set to random */ 
-            if (human_player.thiscolor == C_WHITE) {
-                computer_player.thiscolor = C_RED; 
-            } else (computer_player.thiscolor = C_WHITE);
-      
-            /* play game */
-            play_game(&human_player, &computer_player);
-            
-            break;
-            
-        case 2:
-            printf("Display High Scores");
-            break;
+                /* initialize human player located in player.c */
+                get_human_player(&human_player);
+                printf("\nHuman Color: %d\n", human_player.thiscolor);
+               
+                /* initialize computer */
+                get_computer_player(&computer_player);
+                
+                /* sets the color of computer after human is set to random */ 
+                if (human_player.thiscolor == C_WHITE) {
+                    computer_player.thiscolor = C_RED; 
+                } else (computer_player.thiscolor = C_WHITE);
+          
+                /* play game */
+                play_game(&human_player, &computer_player);
+                
+                break;
+                
+            case 2:
+                printf("Display High Scores");
+                break;
 
-        case 3:
-            printf("\nThanks for playing...\n");
-            return EXIT_SUCCESS;
+            case 3:
+                printf("\nThanks for playing...\n");
+                return EXIT_SUCCESS;
+        }
+
+                        /* if there was not a draw, add player to the scoreboard in 
+                         * order by number of tokens in play
+                         */
+
+                        /* let the user know who won */
+
+                        /* if there was a draw, alert the user to this fact */
+
+                    /* display the scoreboard option */
+
+                    /* quit the program option */
     }
 
-		    /* if there was not a draw, add player to the scoreboard in 
-		     * order by number of tokens in play
-		     */
-
-		    /* let the user know who won */
-
-		    /* if there was a draw, alert the user to this fact */
-
-		/* display the scoreboard option */
-
-		/* quit the program option */
     return EXIT_SUCCESS;
-
 }

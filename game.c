@@ -78,8 +78,8 @@ struct player* play_game(struct player *human , struct player *computer)
     /* Function for controlling game */ 
     /* declaration that allocates the board for the game */
     enum cell_contents board[BOARDHEIGHT][BOARDWIDTH];
-    enum cell_contents current_token = C_WHITE;
- 
+    enum game_state check_winner;
+
     /* variable for storing current player */
     struct player *current;
     struct player *other;
@@ -111,8 +111,19 @@ struct player* play_game(struct player *human , struct player *computer)
         
         display_board(board);
 
-        test_for_winner(board);
+        /* test for winner */
+        check_winner = test_for_winner(board);
         
+        if (check_winner == G_RED) {
+            printf("RED WINS!");
+            return NULL;
+
+        } else if (check_winner == G_WHITE) {
+            printf("WHITE WINS!");
+            return NULL; 
+        } 
+
+
         swap_players(&current, &other);  
         
         printf("\n%s\n", current->name);
@@ -171,6 +182,7 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
                             "*****************\n",
                             "     Red Wins    \n",
                             "*****************\n");
+                    return G_RED;
                 }
             } else { 
                 red_count = 0;    
@@ -183,6 +195,8 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
                            "******************\n", 
                            "    White Wins    \n",
                            "******************\n");
+                
+                    return G_WHITE; 
                 }
             } else { 
                 white_count = 0;
@@ -198,27 +212,23 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
         for (j = 0; j < BOARDHEIGHT; ++j) {
         
             if (board[j][i] == C_RED) {
-               red_count ++;
-               if (red_count >= 4) {
-                  enum game_state winner = G_RED; 
-                  printf("\n%s%s%s\n", "**********************\n",
-                                       "       Red Wins!      \n",
-                                       "**********************\n");
-                  main();
-               }
+                red_count ++;
+               
+                if (red_count >= 4) {
+                    return G_RED;
+                }
+
             } else {
                red_count = 0;
             }
 
             if (board[j][i] == C_WHITE) {
                 white_count++;
+            
                 if (white_count >= 4) {
-                   
-                    printf("\n%s%s%s\n", "********************\n",
-                                         "     White Wins!    \n",
-                                         "********************\n");
-                    main();
+                    return G_WHITE;
                 }
+
             } else {
                 white_count = 0;
             }
@@ -243,16 +253,6 @@ enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
         } 
     }
     */
+
+    return G_NO_WINNER; 
 }
-
-
-
-
-
-
-
-
-
-
-
-

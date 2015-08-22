@@ -36,9 +36,12 @@ void initialise_board(enum cell_contents board[][BOARDWIDTH])
  **/
 void display_board(enum cell_contents board[][BOARDWIDTH])
 {   
+    int k;
+    int i;
+    int j;
+
     printf("\n%s\n", "Current state of board is:");
     
-    int k, i, j;
     for (k = 1; k < BOARDWIDTH + 1; ++k) {
         printf(" %d |", k);  
     }
