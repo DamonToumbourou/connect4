@@ -14,6 +14,12 @@
  **/
 void init_scoreboard(scoreboard board)
 {
+    int i; 
+    
+    for (i = 0; i < SCOREBOARDSIZE; ++i) {
+        board[i].counters = 0; 
+        strcpy(board[i].name, " "); 
+    }
 }
 
 /** For this requirement, you will need to display the scores in the
@@ -36,7 +42,20 @@ void init_scoreboard(scoreboard board)
  * @param board the scoreboard to display
  **/
 void display_scores(const scoreboard board)
-{
+{   
+    int i;
+
+    printf("\n%s%s", "Player              | "
+                   , "Score                 ");
+
+    printf("\n%s%s", "----------------------"
+                   , "----------------------");
+        
+    for (i = 0; i < SCOREBOARDSIZE; ++i) {
+
+        printf("\n%s%22d", board[i].name, board[i].counters);  
+    }
+
 }
 
 /** When the game ends, you need to return the appropriate game state
@@ -69,6 +88,9 @@ void display_scores(const scoreboard board)
      * time the player won.  Remember that empty slots in the
      * scoreboard are signified by names which are equivalent to the
      * empty string.
+     *
      */
+    board[0].counters = sc;             
+
     return FALSE; 
 }

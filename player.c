@@ -13,6 +13,7 @@
  * @param human the human player to initialise
  **/
 
+
 enum input_result get_human_player(struct player* human)
 {
     /* placeholder return value. You should prompt the user 
@@ -20,7 +21,7 @@ enum input_result get_human_player(struct player* human)
      * player struct to sensible values.
      */
 
-    /*Set players name */
+    /* Set players name */
     char temp_name[NAMELEN+1];
 
     printf("\nPlease enter your name: ");
@@ -29,11 +30,13 @@ enum input_result get_human_player(struct player* human)
 
     printf("\nHello %s\n", human->name);
 
-    /* set player color random*/
-
+    /* set human player color using random function: 
+     * if human is white goes first 
+     * else computer is white.
+     * */
     human->thiscolor = get_random(1, 2); 
     
-    /* set counter to 0 */
+    /* set piece counter to 0 */
     human->counters = 0; 
     
     /* set player type Human or Computer */
@@ -41,6 +44,7 @@ enum input_result get_human_player(struct player* human)
 
     return FAILURE;
 }
+
 
 /**
  * @param computer the computer player to initialise
@@ -87,6 +91,8 @@ enum input_result get_computer_player(struct player * computer)
  * @return enum @ref input_result indicating the state of user input (in 
  * case this run involved user input
  **/
+
+
 enum input_result take_turn(struct player * current,
         enum cell_contents board[][BOARDWIDTH])
 {
@@ -99,11 +105,12 @@ enum input_result take_turn(struct player * current,
     int selection; 
     int length = 1;
     int i; 
-    /* loop for a turn */
-    
-    if (current->type == HUMAN) {
-        printf("\n%s", "Human Turn Number: ");
 
+    /* loop for a turn */
+    if (current->type == HUMAN) {
+        printf("\n%s%d\n", "Human Turn Number: "
+                       , current->counters);
+        
         /* get column number from human */
         printf("\n%s\n", "Please enter a column number human: "); 
         get_integer(&selection, length, MINCOLUMN, MAXCOLUMN);
@@ -115,20 +122,29 @@ enum input_result take_turn(struct player * current,
         current->counters++;
 
     } else {
-        printf("\n%s", "Computer Turn: ");
-        printf("%d", current->counters);
-            
+        printf("\n%s%d\n", "Computer Turn: "
+                     , current->counters);
+
+        /* computer column selection uses random function */
         selection = get_random(MINCOLUMN, MAXCOLUMN);
-    
+        
         current_token = current->thiscolor;
     }    
 
     /* add current player selection to the board */ 
-    for (i = BOARDHEIGHT-1; i >= 0; --i) {
+    for (i = BOARDHEIGHT-1; i >= -1; --i) {
+        /* check for full column */ 
+        if (i == -1) {
+            printf("Column Full!");
+            take_turn(current, board);
+            
+        }    
+        /* add token to board if slot is empty */    
         if (board[i][selection -1] == C_EMPTY) {
             board[i][selection -1] = current_token;             
             break;
         }
+        
     }
     
     return FAILURE;

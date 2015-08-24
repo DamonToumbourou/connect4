@@ -57,7 +57,10 @@ int main(void)
     int result;
     int min, max;
     int int_length = 1;  
-   
+    int i;
+
+    int points_scored;
+    
     /* declare scoreboard for keeping track of winners */
     scoreboard scores;
    
@@ -65,7 +68,8 @@ int main(void)
     struct player human_player, computer_player, *winner;
 
     /* initialise the scoreboard */
-     
+    init_scoreboard(scores);
+
     /*display menu and get menu choice until the user chooses to quit */
     
     while(TRUE) {
@@ -97,13 +101,31 @@ int main(void)
                     computer_player.thiscolor = C_RED; 
                 } else (computer_player.thiscolor = C_WHITE);
           
-                /* play game */
-                play_game(&human_player, &computer_player);
+                /* play game and save return state which is the winning player*/
+                winner = play_game(&human_player, &computer_player);
                 
+                points_scored = winner->counters;
+
+                printf("\n%s%d", "Points: ", points_scored);
+                printf("\n%s%s\n", "By the winner: ", winner->name); 
+
+                for (i = 0; i < SCOREBOARDSIZE; ++i) {
+                    
+                    if (scores[i].counters == 0) {
+                        
+                        scores[i].counters = points_scored;
+                        strcpy(scores[i].name, winner->name);   
+                        break;          
+                    }
+                }
+
                 break;
                 
             case 2:
-                printf("Display High Scores");
+                printf("\n*** SCOREBOARD ***\n");
+                                
+                display_scores(scores);
+
                 break;
 
             case 3:

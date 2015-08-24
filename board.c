@@ -24,10 +24,12 @@ void initialise_board(enum cell_contents board[][BOARDWIDTH])
     int i, j;
     for (i = 0; i < BOARDHEIGHT; i++) {
         for (j = 0; j < BOARDWIDTH; j++) {
-        board[i][j] = C_EMPTY;  
+            board[i][j] = C_EMPTY;  
         }
     }
 }
+
+
 /**
  * In this requirement you are required to display the game board. 
  * The game board should be displayed as shown on the first page of the 

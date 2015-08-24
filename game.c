@@ -104,29 +104,39 @@ struct player* play_game(struct player *human , struct player *computer)
         printf("\n%s\n", "Computer goes first");
     }
 
-    /* human and computer take a turn */
+    /* human and computer take a turn 
+     * until winner found then loop exit.
+     * */
     while(TRUE) {
     
+        /* pointer to current player passed to take turn function */
         take_turn(current, board);
         
+        /* board is displayed after turn is made to show changes */
         display_board(board);
 
-        /* test for winner */
+        /* run the test for winner function and save result in variable
+         * for saving latest winner state */
         check_winner = test_for_winner(board);
         
         if (check_winner == G_RED) {
-            printf("RED WINS!");
-            return NULL;
+            printf("\nRED CONNECTED 4!\n");
+            printf("\n%s%s\n", "You win: ", current->name);              
+              
+            return current;
 
         } else if (check_winner == G_WHITE) {
-            printf("WHITE WINS!");
-            return NULL; 
+            printf("\nWHITE CONNECTED 4!\n");
+            printf("\n%s%s\n", "You win: "
+                             , current->name);
+            return current; 
         } 
-
-
+        
+        /* swap current players using pointer swap */
         swap_players(&current, &other);  
         
-        printf("\n%s\n", current->name);
+        printf("\n%s%s\n", "Current player is: "
+                         , current->name );
     }
     
     return NULL;
@@ -161,26 +171,31 @@ struct player* play_game(struct player *human , struct player *computer)
  * this, return the appropriate value of either G_RED or G_WHITE.
  *
  * Next, test for a draw. If none of these cases hold, return G_NO_WINNER.
+ *
+ * Main test for winner function controls the three functions I use to 
+ * check board for winner. Function names are self explanatory. 
+ * 
  * @param board the gameboard to test for a winner
  **/
 enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH])
 {
     enum game_state winner_test;    
-
+    
+    /* run the function to test for horizontal winner */
     winner_test = test_for_winner_horizontal(board); 
-
 
     if (winner_test != G_NO_WINNER) {
         return winner_test; 
     }
     
+    /* run the function to test for vertical winner */ 
     winner_test = test_for_winner_vertical(board);
-
 
     if (winner_test != G_NO_WINNER) {
         return winner_test;
     }
 
+    /* run the function to test for diagonal winner */
     winner_test = test_for_winner_diagonal(board);
     if (winner_test != G_NO_WINNER) {
         return winner_test;
