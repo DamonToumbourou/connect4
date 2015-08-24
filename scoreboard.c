@@ -90,7 +90,6 @@ void display_scores(const scoreboard board)
      * empty string.
      *
      */
-    board[0].counters = sc;             
 
     return FALSE; 
 }

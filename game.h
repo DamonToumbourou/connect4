@@ -50,3 +50,9 @@ struct player* play_game(struct player*, struct player*);
  **/
 enum game_state test_for_winner( enum cell_contents board[][BOARDWIDTH]);
 
+enum game_state test_for_winner_horizontal( enum cell_contents board[][BOARDWIDTH]);
+
+enum game_state test_for_winner_vertical( enum cell_contents board[][BOARDWIDTH]);
+
+enum game_state test_for_winner_diagonal( enum cell_contents board[][BOARDWIDTH]);
+

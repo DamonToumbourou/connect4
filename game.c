@@ -294,6 +294,7 @@ enum game_state test_for_winner_diagonal(enum cell_contents board[][BOARDWIDTH])
 {
     int i;
     int j;
+    int k;
     int right_red_count;
     int left_red_count;
     int right_white_count;
@@ -312,7 +313,7 @@ enum game_state test_for_winner_diagonal(enum cell_contents board[][BOARDWIDTH])
                 continue;       
             }
 
-            for (int k = 0; k < 4; ++k) {
+            for (k = 0; k < 4; ++k) {
 
                 if ((j+k < BOARDWIDTH-1) && (i+k < BOARDHEIGHT)) {
                     
