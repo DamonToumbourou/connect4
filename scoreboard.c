@@ -3,8 +3,8 @@
 * Semester 2 2015 Assignment #1 
 * Full Name        : Damon Toumbourou
 * Student Number   : s3019592
-* Course Code      : EDIT HERE
-* Program Code     : EDIT HERE
+* Course Code      : 
+* Program Code     : 
 * Start up code provided by Paul Miller
 ***********************************************************************/
 #include "scoreboard.h"
@@ -52,7 +52,7 @@ void display_scores(const scoreboard board)
                    , "----------------------");
         
     for (i = 0; i < SCOREBOARDSIZE; ++i) {
-
+    
         printf("\n%s%22d", board[i].name, board[i].counters);  
     }
 
@@ -81,15 +81,33 @@ void display_scores(const scoreboard board)
  * @param board the scoreboard to add the score to @param sc the score
  * to add to the scoreboard
  **/ 
- BOOLEAN add_to_scoreboard(scoreboard board, const score * sc) 
- {
-    /* placeholder return value - delete this and insert logic for
-     * inserting in sorted order by number of counters in play at the
-     * time the player won.  Remember that empty slots in the
-     * scoreboard are signified by names which are equivalent to the
-     * empty string.
-     *
-     */
+BOOLEAN add_to_scoreboard(scoreboard board, const score * sc) 
+{
+    int i;
+    int j;
+    int count;
+    int temp;
+    int score_to_add;
+    score_to_add  = sc->counters; 
+    
+
+    printf("\n%s%s", "Winner: ", sc->name);      
+    printf("\n%s%d\n", "Score: ", sc->counters); 
+    
+    board[10].counters = score_to_add;
+
+       i = 10; 
+        for (j = SCOREBOARDSIZE-1; j >=0; --j) {
+              
+             
+            if (board[i].counters > board[j].counters) {
+                temp = board[j].counters; 
+                board[j].counters = board[i].counters; 
+                board[i].counters = temp;
+            }
+        i--;
+        
+    }   
 
     return FALSE; 
 }

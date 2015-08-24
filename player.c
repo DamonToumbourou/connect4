@@ -118,7 +118,7 @@ enum input_result take_turn(struct player * current,
         /* get player token color */
         current_token = current->thiscolor;
 
-        /* add to counter for human */
+        /* add turn  counter for human */
         current->counters++;
 
     } else {
@@ -128,7 +128,11 @@ enum input_result take_turn(struct player * current,
         /* computer column selection uses random function */
         selection = get_random(MINCOLUMN, MAXCOLUMN);
         
+        /* get computer token color */
         current_token = current->thiscolor;
+   
+        /* increment turn counter for computer */
+        current->counters++;
     }    
 
     /* add current player selection to the board */ 

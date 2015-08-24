@@ -104,11 +104,9 @@ int main(void)
                 /* play game and save return state which is the winning player*/
                 winner = play_game(&human_player, &computer_player);
                 
-                points_scored = winner->counters;
-
-                printf("\n%s%d", "Points: ", points_scored);
-                printf("\n%s%s\n", "By the winner: ", winner->name); 
-
+                add_to_scoreboard(scores, winner);
+                
+                /*    
                 for (i = 0; i < SCOREBOARDSIZE; ++i) {
                     
                     if (scores[i].counters == 0) {
@@ -118,6 +116,7 @@ int main(void)
                         break;          
                     }
                 }
+                */
 
                 break;
                 
