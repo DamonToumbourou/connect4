@@ -22,24 +22,8 @@ void init_scoreboard(scoreboard board)
     }
 }
 
-/** For this requirement, you will need to display the scores in the
- * order they are scored in the scoreboard array. 
- *
- * The display should look as follows: 
- * Player               |Score
- * --------------------------------------------- 
- * Barney               |17 
- * Magi                 |15 
- * Red                  |10 
- * Computer             |8 
- * Computer             |7 
- * Computer             |6 
- * Paul                 |4 
- * Fred                 |4 
- * Muaddib              |4
- * Zafiqa               |4
- * 
- * @param board the scoreboard to display
+
+ /* @param board the scoreboard to display
  **/
 void display_scores(const scoreboard board)
 {   
@@ -55,59 +39,50 @@ void display_scores(const scoreboard board)
     
         printf("\n%s%22d", board[i].name, board[i].counters);  
     }
-
 }
 
-/** When the game ends, you need to return the appropriate game state
- * back to main. You will then need to insert the winner's score
- * sorted in order by the number of counters that they played in the
- * game. You should only store the top ten scores and so when a new score
- * is entered on a full scoreboard, the lowest score simply drops off the
- * bottom of the board.  
- * 
- * Both scoreboard and score are typedefs (aliases) of other types.
- *
- * Scoreboard is defined as: typedef struct player
- *
- * scoreboard[SCOREBOARDSIZE]; and score is defined as: 
- *
- * typedef struct player score; 
- *
- * In other words, a scoreboard is an array of struct player of
- * SCOREBOARDSIZE (10) and a score is another name of a player struct.
- * This has been done so we can reuse the type and it simplifies the
- * maintenance of the code.
- * 
- * @param board the scoreboard to add the score to @param sc the score
+
+ /* @param board the scoreboard to add the score to @param sc the score
  * to add to the scoreboard
- **/ 
+ */ 
 BOOLEAN add_to_scoreboard(scoreboard board, const score * sc) 
 {
     int i;
     int j;
-    int count;
-    int temp;
+    int temp_score;
     int score_to_add;
+
+    char temp_string[22];
+    char *temp;
+    temp = temp_string;
+
     score_to_add  = sc->counters; 
-    
 
     printf("\n%s%s", "Winner: ", sc->name);      
     printf("\n%s%d\n", "Score: ", sc->counters); 
     
     board[10].counters = score_to_add;
+    strcpy(board[10].name, sc->name); 
 
-       i = 10; 
-        for (j = SCOREBOARDSIZE-1; j >=0; --j) {
-              
-             
-            if (board[i].counters > board[j].counters) {
-                temp = board[j].counters; 
-                board[j].counters = board[i].counters; 
-                board[i].counters = temp;
-            }
-        i--;
-        
-    }   
+    /* loop through scoreboard and will swap position if score greater 
+     * starting at position 10.
+     */
+    i = SCOREBOARDSIZE;
+    for (j = SCOREBOARDSIZE-1; j >= 0; --j) {
+           
+        if (board[i].counters > board[j].counters) {
+            
+            temp_score = board[j].counters; 
+            board[j].counters = board[i].counters; 
+            board[i].counters = temp_score;
+           
+            strcpy(temp, board[j].name);
+            strcpy(board[j].name, board[i].name);
+            strcpy(board[i].name, temp);
+
+            i--;       
+        }
+    }
 
     return FALSE; 
 }
