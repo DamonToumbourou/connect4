@@ -1,10 +1,10 @@
 /***********************************************************************
 * COSC1076 - Advanced Programming Techniques
 * Semester 2 2015 Assignment #1 
-* Full Name        : EDIT HERE
-* Student Number   : EDIT HERE
-* Course Code      : EDIT HERE
-* Program Code     : EDIT HERE
+* Full Name        : Damon Toumbourou
+* Student Number   : s3019592
+* Course Code      : BP094
+* Program Code     : COSC1076
 * Start up code provided by Paul Miller
 * File:     helper.c
 ***********************************************************************/
@@ -18,12 +18,6 @@
 #define FAILURE 0
 #define TEMP_STRING_LENGTH 11
 
-/**
- * @file helpers.c contains various functions that help in the
- * implementation of the program. You should put functions you create
- * here unless they logically belong to another module (such as
- * player, board or game
- **/
 
 /**
  * Deals with buffering
@@ -135,5 +129,3 @@ int get_random(int min, int max) {
     printf("\n%d\n", random);
     return random;  
 }
-
-

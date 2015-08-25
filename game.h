@@ -1,10 +1,10 @@
 /***********************************************************************
 * COSC1076 - Advanced Programming Techniques
 * Semester 2 2015 Assignment #1 
-* Full Name        : EDIT HERE
-* Student Number   : EDIT HERE
-* Course Code      : EDIT HERE
-* Program Code     : EDIT HERE
+* Full Name        : Damon Toumbourou
+* Student Number   : s3019592
+* Course Code      : BP094
+* Program Code     : COSC1076
 * Start up code provided by Paul Miller
 * File:     game.h 
 ***********************************************************************/

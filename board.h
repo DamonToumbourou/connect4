@@ -3,8 +3,8 @@
 * Semester 2 2015 Assignment #1 
 * Full Name        : Damon Toumbourou
 * Student Number   : s3019592
-* Course Code      : 
-* Program Code     : 
+* Course Code      : BP094
+* Program Code     : COSC1076
 * Start up code provided by Paul Miller
 * File: board.h
 ***********************************************************************/
