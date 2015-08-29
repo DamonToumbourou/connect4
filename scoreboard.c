@@ -37,7 +37,7 @@ void display_scores(const scoreboard board)
         
     for (i = 0; i < SCOREBOARDSIZE; ++i) {
     
-        printf("\n%s%22d", board[i].name, board[i].counters);  
+        printf("\n%-22s%d", board[i].name, board[i].counters);  
     }
 }
 

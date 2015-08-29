@@ -92,21 +92,16 @@ enum input_result take_turn(struct player * current,
         /* get player token color */
         current_token = current->thiscolor;
 
-        /* add turn  counter for human */
-        current->counters++;
-
     } else {
-        printf("\n%s%d\n", "Computer Turn: "
-                     , current->counters);
+        printf("\n%s%d\n", "Computer Turn: ", current->counters);
+        
+        waitFor(1);
 
         /* computer column selection uses random function */
         selection = get_random(MINCOLUMN, MAXCOLUMN);
-        
+                
         /* get computer token color */
         current_token = current->thiscolor;
-   
-        /* increment turn counter for computer */
-        current->counters++;
     }    
 
     /* add current player selection to the board */ 
@@ -120,6 +115,9 @@ enum input_result take_turn(struct player * current,
         /* add token to board if slot is empty */    
         if (board[i][selection -1] == C_EMPTY) {
             board[i][selection -1] = current_token;             
+        
+            /* increment turn count */
+            current->counters++;
             break;
         }
         

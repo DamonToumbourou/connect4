@@ -51,5 +51,7 @@ int get_integer(int* integer, int length, int min, int max);
 int get_string(char* string, unsigned length);
 
 int get_random(int min, int max); 
+
+void waitFor(unsigned int secs);
 #endif
 
